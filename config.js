@@ -17,7 +17,8 @@ module.exports = {
       },
       run: (filepath) => {
         const baseName = filepath.replace(".cpp", "");
-        return `${resourceLimitPrefix} ./${baseName}.exe"`.trim();
+        // O executável estará no mesmo diretório que o .cpp
+        return `${resourceLimitPrefix} ./${baseName}.exe`.trim();
       },
     },
     java: {
@@ -30,7 +31,5 @@ module.exports = {
         return `${resourceLimitPrefix} java -Xmx256m -cp "${dirName}" ${className}`.trim();
       },
     },
-  },
-};
   },
 };

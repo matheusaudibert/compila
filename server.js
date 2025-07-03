@@ -7,7 +7,8 @@ const { runTests } = require("./core/testRunner");
 const { submissionsDir } = require("./config");
 
 const app = express();
-const PORT = 3000;
+// Usa a porta fornecida pelo ambiente (Square Cloud) ou 3000 como padrão.
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
