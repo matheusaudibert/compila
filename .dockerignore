@@ -1,0 +1,13 @@
+# Ignora dependências do Node, que serão instaladas dentro do contêiner.
+node_modules
+
+# Ignora logs e arquivos de ambiente.
+npm-debug.log
+error.log
+
+# Ignora o diretório de submissões, que será montado como um volume.
+submissions
+
+# Ignora arquivos do Docker.
+Dockerfile
+.dockerignore
