@@ -18,7 +18,8 @@ app.post("/submit", async (req, res) => {
     return res.status(400).json({ error: "Campos faltando" });
   }
 
-  const filename = `${uuidv4()}.${language}`;
+  const submissionId = uuidv4();
+  const filename = `${submissionId}.${language}`;
   const filepath = path.join(submissionsDir, filename);
 
   try {
@@ -29,6 +30,15 @@ app.post("/submit", async (req, res) => {
     res.status(500).json({ error: e.message });
   } finally {
     await fs.remove(filepath).catch(() => {});
+    if (language === "cpp") {
+      const exeFilepath = filepath.replace(".cpp", ".exe");
+      await fs.remove(exeFilepath).catch(() => {});
+    }
+    if (language === "java") {
+      // O arquivo .class gerado terá o nome da classe, não do arquivo.
+      const classFilepath = path.join(path.dirname(filepath), "Main.class");
+      await fs.remove(classFilepath).catch(() => {});
+    }
   }
 });
 
